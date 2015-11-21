@@ -1,13 +1,14 @@
 package com.ursideus;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
 
 /**
  * Created by dovw on 11/20/15.
  */
-
+@Component
 public class Offer {
 
     private BigInteger id;
