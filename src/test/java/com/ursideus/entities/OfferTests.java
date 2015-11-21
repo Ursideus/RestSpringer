@@ -1,7 +1,6 @@
 package com.ursideus.entities;
 
 import com.ursideus.AbstractTest;
-import com.ursideus.Offer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

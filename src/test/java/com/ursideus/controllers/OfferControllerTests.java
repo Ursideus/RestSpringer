@@ -8,13 +8,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
 /**
  * Created by dovw on 11/21/15.
  */
-
 
 public class OfferControllerTests extends AbstractControllerTest {
 
@@ -30,7 +30,6 @@ public class OfferControllerTests extends AbstractControllerTest {
 
     @Test
     public void testFindAll() throws Exception {
-
         /// Arrange
         String uri = "/api/offers";
 
@@ -42,6 +41,5 @@ public class OfferControllerTests extends AbstractControllerTest {
         /// Assert
         assertEquals("Failed : expected HTTP status 200", 200, status);
         assertTrue("Failed: expected HTTP response body to have a value", content.trim().length() > 0);
-
     }
 }
