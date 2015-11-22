@@ -57,7 +57,7 @@ public class OfferController {
     }
 
     @RequestMapping(
-            value = "/api/offers/{id}",
+            value = "/api/offers",
             method = RequestMethod.PUT,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -75,7 +75,7 @@ public class OfferController {
             method = RequestMethod.DELETE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
             //produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Offer> deleteOffer(Long offerId) {
+    public ResponseEntity<Offer> deleteOffer(@PathVariable("id") Long offerId) {
 
         offersService.delete(offerId);
 //        boolean isDeleted = offersService.delete(offerId);

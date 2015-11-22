@@ -4,14 +4,16 @@ import com.ursideus.entities.Offer;
 import com.ursideus.repositories.OffersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigInteger;
 import java.util.Collection;
 
 /**
  * Created by dovw on 11/21/15.
  */
 @Service
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true) // readonly == non modifying method
 public class OffersServiceBean implements OffersService {
 
     @Autowired
@@ -75,6 +77,7 @@ public class OffersServiceBean implements OffersService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false) // override class directive
     public Offer create(Offer offer) {
         if (offer.getId() != null)
             return null;
@@ -84,6 +87,7 @@ public class OffersServiceBean implements OffersService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false) // override class directive
     public Offer update(Offer offer) {
         Offer offerPersisted = findOne(offer.getId());
         if (offerPersisted == null)
@@ -94,6 +98,7 @@ public class OffersServiceBean implements OffersService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false) // override class directive
     public void delete(Long id) {
         offersRepository.delete(id); ;
     }
