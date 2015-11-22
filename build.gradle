@@ -32,11 +32,18 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-actuator")
 
-//    compile("org.springframework.boot:spring-boot-starter-jdbc")
-//    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    //compile("org.springframework.boot:spring-boot-starter-jdbc")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-data-rest")
+
+    compile('org.hsqldb:hsqldb:2.3.2')
 
     //compile('org.springframework.boot:spring-boot-devtools')
     //('org.springframework.boot:spring-boot-starter-aop')
+
+    /// JDBC drivers
+    runtime("org.hsqldb:hsqldb")
+    //runtime("mysql:mysql-connector-java:5.1.25")
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile("junit:junit")

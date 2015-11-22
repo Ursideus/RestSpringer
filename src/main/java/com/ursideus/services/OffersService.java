@@ -11,8 +11,8 @@ import java.util.Collection;
 public interface OffersService {
 
     Collection<Offer> findAll();
-    Offer findOne(BigInteger id);
+    Offer findOne(Long id);
     Offer create(Offer offer);
     Offer update(Offer offer);
-    void delete(BigInteger id);
+    void delete(Long id);
 }

@@ -1,36 +1,45 @@
 package com.ursideus.entities;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import java.math.BigInteger;
+import javax.persistence.*;
 
 /**
  * Created by dovw on 11/20/15.
  */
 @Component
+@Entity
+@Table(name="offer")
 public class Offer {
 
-    private BigInteger id;
+    @Id
+    @GeneratedValue
+    //@GeneratedValue(strategy=GenerationType.AUTO)
+    //@GeneratedValue(strategy=GenerationType.IDENTITY)
+    //@Column(name="id", unique=true, nullable=false)
+    private Long id;
+    //@Column(name="name", nullable=false)
     private String name;
+    //@Column(name="email", nullable=false)
     private String email;
+    //@Column(name="text")
     private String text;
 
     public Offer() {
     }
 
-    public Offer(BigInteger id, String name, String email, String text) {
+    public Offer(Long id, String name, String email, String text) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.text = text;
     }
 
-    public BigInteger getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

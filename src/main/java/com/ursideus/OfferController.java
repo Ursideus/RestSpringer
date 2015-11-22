@@ -36,7 +36,7 @@ public class OfferController {
             value = "/api/offers/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Offer> getOffer(@PathVariable("id") BigInteger id) {
+    public ResponseEntity<Offer> getOffer(@PathVariable("id") Long id) {
         Offer offer = offersService.findOne(id);
 
         if (offer == null)
@@ -75,7 +75,7 @@ public class OfferController {
             method = RequestMethod.DELETE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
             //produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Offer> deleteOffer(BigInteger offerId) {
+    public ResponseEntity<Offer> deleteOffer(Long offerId) {
 
         offersService.delete(offerId);
 //        boolean isDeleted = offersService.delete(offerId);

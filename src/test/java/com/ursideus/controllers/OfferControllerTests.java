@@ -9,13 +9,15 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 
+import javax.transaction.Transactional;
+
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
 /**
  * Created by dovw on 11/21/15.
  */
-
+@Transactional
 public class OfferControllerTests extends AbstractControllerTest {
 
     @Before
