@@ -1,6 +1,7 @@
-package com.ursideus;
+package com.ursideus.controllers;
 
 import com.ursideus.entities.Offer;
+import com.ursideus.services.EmailService;
 import com.ursideus.services.OffersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
 import java.util.Collection;
+import java.util.concurrent.Future;
 
 
 /**
@@ -21,6 +23,9 @@ public class OfferController {
 
     @Autowired
     private OffersService offersService;
+
+    @Autowired
+    private EmailService emailService;
 
     @RequestMapping(
             value = "/api/offers",
@@ -83,6 +88,35 @@ public class OfferController {
 //        if (!isDeleted)
 //            return new ResponseEntity<Offer>(HttpStatus.INTERNAL_SERVER_ERROR);
         return new ResponseEntity<Offer>(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(
+            value = "/api/offers/{id}/email",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    //produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Offer> emailOffer(@PathVariable("id") Long offerId,
+                                        @RequestParam(value = "wait", defaultValue = "false") boolean waitForAsyncResult) {
+
+        Offer offer = null;
+        try {
+            offer = offersService.findOne(offerId);
+            if (offer == null) {
+                return new ResponseEntity<Offer>(HttpStatus.NOT_FOUND);
+            }
+            if (waitForAsyncResult) {
+                Future<Boolean> asyncResponse = emailService.sendAsyncWithResult(offer);
+                boolean isEmailSent = asyncResponse.get();
+
+            } else {
+                emailService.sendAsync(offer);
+            }
+
+        } catch (Exception ex) {
+            return new ResponseEntity<Offer>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<Offer>(offer, HttpStatus.OK);
     }
 }
 

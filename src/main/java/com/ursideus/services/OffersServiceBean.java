@@ -22,6 +22,9 @@ public class OffersServiceBean implements OffersService {
     @Autowired
     private OffersRepository offersRepository;
 
+    @Autowired
+    private EmailService emailService;
+
     @Override
     public Collection<Offer> findAll() {
         Collection<Offer> offers = offersRepository.findAll();
