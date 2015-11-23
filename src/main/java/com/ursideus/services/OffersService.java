@@ -15,4 +15,6 @@ public interface OffersService {
     Offer create(Offer offer);
     Offer update(Offer offer);
     void delete(Long id);
+    void flushCache(); /// empty method to hold @CacheEvict annotation
+
 }
