@@ -28,6 +28,12 @@ public class Offer {
     public Offer() {
     }
 
+    public Offer(String name, String email, String text) {
+        this.name = name;
+        this.email = email;
+        this.text = text;
+    }
+
     public Offer(Long id, String name, String email, String text) {
         this.id = id;
         this.name = name;
