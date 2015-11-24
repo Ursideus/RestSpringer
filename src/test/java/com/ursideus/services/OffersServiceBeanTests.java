@@ -32,7 +32,13 @@ public class OffersServiceBeanTests extends AbstractTest {
     }
 
     @After
-    public void tearDown() {}
+    public void tearDown() {
+        Collection<Offer> collection =  service.findAll();
+        for (Offer offer : collection) {
+            service.delete(offer.getId());
+        }
+        service.flushCache();
+    }
 
     @Test
     public void testFindAll() throws Exception {
@@ -71,7 +77,9 @@ public class OffersServiceBeanTests extends AbstractTest {
     @Test
     public void testDeleteOffer() throws Exception {
         /// Arrange
-        Long id = new Long(1);
+        Collection<Offer> initialCollection = service.findAll();
+        Long id = initialCollection.iterator().next().getId();
+        //Long id = new Long(1);
         Offer entityToDelete = service.findOne(id);
 
         /// Act

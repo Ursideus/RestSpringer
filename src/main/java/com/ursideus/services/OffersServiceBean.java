@@ -34,8 +34,12 @@ public class OffersServiceBean implements OffersService {
     @Override
     @Cacheable(value = "offers", key = "#id")
     public Offer findOne(Long id) {
-        Offer offer = offersRepository.getOne(id);
-        return offer;
+        try {
+            Offer offer = offersRepository.getOne(id);
+            return offer;
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     @Override
