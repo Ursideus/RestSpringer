@@ -1,6 +1,5 @@
 package com.ursideus.controllers;
 
-import com.ursideus.AbstractControllerTest;
 import com.ursideus.entities.Offer;
 import org.junit.After;
 import org.junit.Before;

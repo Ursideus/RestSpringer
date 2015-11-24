@@ -1,9 +1,10 @@
-package com.ursideus;
+package com.ursideus.controllers;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ursideus.AbstractTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,6 +30,9 @@ public abstract class  AbstractControllerTest extends AbstractTest {
         mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
+    protected void setUp(BaseController controller) {
+        mvc = MockMvcBuilders.standaloneSetup(controller).build();
+    }
 
     protected void tearDown() {}
 

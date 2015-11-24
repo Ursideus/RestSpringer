@@ -19,7 +19,7 @@ import java.util.concurrent.Future;
  */
 
 @RestController
-public class OfferController {
+public class OfferController extends BaseController {
 
     @Autowired
     private OffersService offersService;
