@@ -3,6 +3,7 @@ package com.ursideus.services;
 import com.ursideus.entities.Offer;
 import com.ursideus.repositories.OffersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.metrics.CounterService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -25,8 +26,12 @@ public class OffersServiceBean implements OffersService {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private CounterService counterService;
+
     @Override
     public Collection<Offer> findAll() {
+        counterService.increment("method.invoked.offerServiceBean.findAll");
         Collection<Offer> offers = offersRepository.findAll();
         return offers;
     }
@@ -34,6 +39,7 @@ public class OffersServiceBean implements OffersService {
     @Override
     @Cacheable(value = "offers", key = "#id")
     public Offer findOne(Long id) {
+        counterService.increment("method.invoked.offerServiceBean.findOne");
         try {
             Offer offer = offersRepository.getOne(id);
             return offer;
@@ -46,6 +52,7 @@ public class OffersServiceBean implements OffersService {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false) /// override class directive
     @CachePut(value = "offers", key = "#result.id")
     public Offer create(Offer offer) {
+        counterService.increment("method.invoked.offerServiceBean.create");
         if (offer.getId() != null)
             return null;
 
@@ -57,6 +64,7 @@ public class OffersServiceBean implements OffersService {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false) /// override class directive
     @CachePut(value = "offers", key = "#offer.id")  /// cache value by key from argument to func. offer.
     public Offer update(Offer offer) {
+        counterService.increment("method.invoked.offerServiceBean.update");
         Offer offerPersisted = findOne(offer.getId());
         if (offerPersisted == null)
             return null;
@@ -69,6 +77,7 @@ public class OffersServiceBean implements OffersService {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false) /// override class directive
     @CacheEvict(value = "offers", key = "#id")   /// remove cached value
     public void delete(Long id) {
+        counterService.increment("method.invoked.offerServiceBean.delete");
         offersRepository.delete(id); ;
     }
 
