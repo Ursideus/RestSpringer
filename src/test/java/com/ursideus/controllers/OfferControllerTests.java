@@ -58,7 +58,9 @@ public class OfferControllerTests extends AbstractControllerTest {
 
         /// Assert
         //assertEquals("Failed : expected HTTP status 404", 404, status);
-        assertTrue("Failed: expected HTTP response body to be empty", content.trim().length() == 0);
+        assertEquals("Failed : expected HTTP status 500", 500, status);
+        //assertTrue("Failed: expected HTTP response body to be empty", content.trim().length() == 0);
+        assertTrue("Failed: expected HTTP response body to be empty", content.contains("Unable to find"));
     }
 
     @Test
